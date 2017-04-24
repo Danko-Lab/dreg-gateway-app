@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+echo "$1=$2\n"
+echo "$3=$4\n"
+data=$2
+echo "$data = " 
+lines=$(cat $data | wc -l)
+echo $lines
+
+
