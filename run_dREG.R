@@ -19,10 +19,23 @@ outfile <- args[3]
 ncores <- as.integer(args[6])
 if (is.na(ncores)) ncores <- 1;
 
-use_rgtsvm <- TRUE;
+use_rgtsvm <- FALSE;
 use_gpu <- toupper(as.character(args[7]))
-if (!is.na(use_gpu) && use_gpu=="GPU")
+if (!is.na(use_gpu) && (use_gpu=="GPU" || use_gpu=="TRUE") )
 	use_rgtsvm <- TRUE;
+if (!is.na(use_gpu) && (use_gpu=="FALSE") )
+	use_rgtsvm <- FALSE;
+
+src_path = as.character(args[8]);
+
+cat("Bigwig(plus):", ps_plus_path, "\n");
+cat("Bigwig(minus):", ps_minus_path, "\n");
+cat("Output:", outfile, "\n");
+cat("dREG model:", args[4], "\n");
+cat("dREG.HD model:", args[5], "\n");
+cat("ncores:", ncores, "\n");
+cat("GPU:", use_rgtsvm, "\n");
+cat("SRC PATH:", src_path, "\n");
 
 ## Now scan all positions in the genome ...
 cat("1) -------- Checking the informative positions\n");
@@ -43,7 +56,7 @@ write.table(pred_data, gz1, row.names=FALSE, col.names=FALSE, quote=FALSE, sep="
 close(gz1)
 
 cat("4) -------- Merge peaks\n");
-system( paste( "bash ", dirname(args[4]), "/writeBed.bsh", " 0.8 ", file.dreg.pred.gz, sep="") );
+system( paste( "bash ", src_path, "/writeBed.bsh", " 0.8 ", file.dreg.pred.gz, sep="") );
 
 file.dreg.peak.gz <- paste(outfile, ".dREG.peak.gz", sep="");
 file.rename(paste(file.dreg.pred.gz, ".bed.gz", sep=""), file.dreg.peak.gz)
@@ -63,8 +76,8 @@ file.rename( paste(file.dreg.peak.gz, "_dREG_HD_stringent.bed", sep=""), paste(o
 make_index_gz<-function(df_bed, outfile, file_id)
 {
 	write.table( df_bed, file=paste( outfile, ".", file_id, sep=""), row.names=FALSE, col.names=FALSE, quote=FALSE, sep="\t");
-	system(paste( "bgzip ", outfile, ".", file_id, sep="") );
-	system(paste( "tabix -p bed ", outfile, ".", file_id, ".gz", sep="") );
+	system(paste( "bgzip -f ", outfile, ".", file_id, sep="") );
+	system(paste( "tabix -f -p bed ", outfile, ".", file_id, ".gz", sep="") );
 }
 make_index_gz(pred_data, outfile, "dREG.pred");
 
@@ -84,4 +97,4 @@ make_index_gz( tb, outfile, "dREG.HD.stringent.bed");
 
 system( paste("tar -cvzf ", outfile, ".dREG.tar.gz", " ", outfile, ".dREG.*", sep="") );
 cat("Result:", paste(outfile, ".dREG.tar.gz", sep=""), "\n");
-
+cat("Done!\n");
