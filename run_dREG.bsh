@@ -33,8 +33,8 @@ popd > /dev/null
 
 gpu=GPU
 ncores=15
-model_dreg=$bsh_path/original-model/asvm.original.rdata
-model_hd=$bsh_path/original-model/dREG_HD.model.rdata
+model_dreg=$bsh_path/newmodel/dregf1-G12356-20k-p3-G1-7.rdata
+model_hd=$bsh_path/original/dREG_HD.model.rdata
 # chrom_info=$bsh_path/chromInfo.hg19
 
 echo "Using: R --vanilla --slave --args $bwPL $bwMN $out $model_dreg $model_hd $chrom_info $ncores $gpu $bsh_path < $bsh_path/run_dREG.R"

@@ -56,7 +56,7 @@ write.table(pred_data, gz1, row.names=FALSE, col.names=FALSE, quote=FALSE, sep="
 close(gz1)
 
 cat("4) -------- Merge peaks\n");
-system( paste( "bash ", src_path, "/writeBed.bsh", " 0.8 ", file.dreg.pred.gz, sep="") );
+system( paste( "bash ", src_path, "/writeBed.bsh", " 0.7 ", file.dreg.pred.gz, sep="") );
 
 file.dreg.peak.gz <- paste(outfile, ".dREG.peak.gz", sep="");
 file.rename(paste(file.dreg.pred.gz, ".bed.gz", sep=""), file.dreg.peak.gz)
