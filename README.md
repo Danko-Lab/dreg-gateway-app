@@ -1,8 +1,6 @@
 # dreg-gateway
 
-Test Environment:
-
-run the following command:
+Run the following commands to check the running environment:
 
 ```
 bedtools --version
