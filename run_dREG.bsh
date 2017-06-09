@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#PUT These variables into .bashrc
+#module load R
+#module load bedtools
+#module load samtools
+
 if [ "$#" -lt 4 ]; then
 	echo ""
 	echo "USAGE: bash dREG.bsh plus_strand.bw minus_strand.bw out_prefix "
@@ -21,11 +26,6 @@ if [ "$#" -gt 5 ]; then
 else
 	out="out"
 fi
-
-module load R
-module load bedtools
-module load samtools
-export PATH=/home/dreg2016/bin/bedops-2.4.25/bin:/opt/biotools/trinity/trinity-plugins/htslib/:$PATH
 
 pushd `dirname $0` > /dev/null
 bsh_path=`pwd`
