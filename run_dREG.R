@@ -48,7 +48,7 @@ make_index_gz<-function( df_bed, out_file)
 {
 	file.tmp <- tempfile(fileext=".bed");
 	write.table( df_bed, file=file.tmp, row.names=FALSE, col.names=FALSE, quote=FALSE, sep="\t");
-	system(paste( "sort-bed ", file.tmp, " | bgzip -f > " out_file, ".gz", sep="") );
+	system(paste( "sort-bed ", file.tmp, " | bgzip -f > ", out_file, ".gz", sep="") );
 	system(paste( "tabix -f -p bed ", out_file, ".gz", sep="") );
 	unlink(file.tmp)
 }
