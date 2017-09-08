@@ -40,17 +40,16 @@ cat("1) -------- Checking the informative positions\n");
 load(args[4]);
 r <- peak_calling( svm, gdm, ps_plus_path, ps_minus_path, ncores=ncores, use_rgtsvm=use_rgtsvm)
 
-outfile <- "out"
 out.file1 <- paste(outfile, "dREG.infp.bed", sep=".")
 out.file2 <- paste(outfile, "dREG.peak.full.bed", sep=".")
 out.file3 <- paste(outfile, "dREG.peak.score.bed", sep=".")
 
-make_index_gz<-function( df_bed, outfile)
+make_index_gz<-function( df_bed, out_file)
 {
 	file.tmp <- tempfile(fileext=".bed");
 	write.table( df_bed, file=file.tmp, row.names=FALSE, col.names=FALSE, quote=FALSE, sep="\t");
-	system(paste( "sort-bed ", file.tmp, " | bgzip -f > " outfile, ".gz", sep="") );
-	system(paste( "tabix -f -p bed ", outfile, ".gz", sep="") );
+	system(paste( "sort-bed ", file.tmp, " | bgzip -f > " out_file, ".gz", sep="") );
+	system(paste( "tabix -f -p bed ", out_file, ".gz", sep="") );
 	unlink(file.tmp)
 }
 
