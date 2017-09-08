@@ -14,33 +14,31 @@ ps_plus_path  <- args[1]
 ps_minus_path <- args[2]
 ## Read arguments from default parameters in run_dREG.sh
 outfile <- args[3]
-#chrom_info <- args[6]
 
-ncores <- as.integer(args[6])
+ncores <- as.integer(args[5])
 if (is.na(ncores)) ncores <- 1;
 
 use_rgtsvm <- FALSE;
-use_gpu <- toupper(as.character(args[7]))
+use_gpu <- toupper(as.character(args[6]))
 if (!is.na(use_gpu) && (use_gpu=="GPU" || use_gpu=="TRUE") )
 	use_rgtsvm <- TRUE;
 if (!is.na(use_gpu) && (use_gpu=="FALSE") )
 	use_rgtsvm <- FALSE;
 
-src_path = as.character(args[8]);
+src_path = as.character(args[7]);
 
 cat("Bigwig(plus):", ps_plus_path, "\n");
 cat("Bigwig(minus):", ps_minus_path, "\n");
 cat("Output:", outfile, "\n");
 cat("dREG model:", args[4], "\n");
-cat("dREG.HD model:", args[5], "\n");
 cat("ncores:", ncores, "\n");
 cat("GPU:", use_rgtsvm, "\n");
 cat("SRC PATH:", src_path, "\n");
 
 ## Now scan all positions in the genome ...
 cat("1) -------- Checking the informative positions\n");
-load("./newmodel/asvm.gdm.6.6M.20170828.rdata");
-r <- peak_calling( asvm, gdm, ps_plus_path, ps_minus_path, ncores=ncores, use_rgtsvm=use_rgtsvm)
+load(args[4]);
+r <- peak_calling( svm, gdm, ps_plus_path, ps_minus_path, ncores=ncores, use_rgtsvm=use_rgtsvm)
 
 outfile <- "out"
 out.file1 <- paste(outfile, "dREG.infp.bed", sep=".")
