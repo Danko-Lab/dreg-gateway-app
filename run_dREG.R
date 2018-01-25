@@ -38,7 +38,7 @@ cat("SRC PATH:", src_path, "\n");
 ## Now scan all positions in the genome ...
 cat("1) -------- Checking the informative positions\n");
 load(args[4]);
-r <- peak_calling( svm, gdm, ps_plus_path, ps_minus_path, ncores=ncores, use_rgtsvm=use_rgtsvm)
+r <- peak_calling( svm, gdm, ps_plus_path, ps_minus_path, cpu_cores=ncores, use_rgtsvm=use_rgtsvm)
 
 out.file1 <- paste(outfile, "dREG.infp.bed", sep=".")
 out.file2 <- paste(outfile, "dREG.peak.full.bed", sep=".")
