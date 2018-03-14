@@ -31,7 +31,7 @@ pushd `dirname $0` > /dev/null
 bsh_path=`pwd`
 popd > /dev/null
 
-gpu=GPU
+gpu=1
 ncores=15
 model_dreg=$bsh_path/newmodel/asvm.gdm.6.6M.20170828.rdata
 
