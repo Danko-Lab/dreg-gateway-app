@@ -87,9 +87,9 @@ make_summary<-function( r, out.log )
 	cat("Broad peaks:", NROW(r$peak_broad), "\n", file=out.log, append=TRUE);
 	cat("Threshold:", r$min_score, "\n", file=out.log, append=TRUE);
 	cat("Narrow peaks:", NROW(r$raw_peak), "\n", file=out.log, append=TRUE);
-	cat("Peaks(p>0.05 ):", r$peak_sum$adjust.none.0.05, "\n", file=out.log, append=TRUE);
-	cat("Peaks(p>0.05 adjusted FDR):", r$peak_sum$adjust.fdr.0.05, "\n", file=out.log, append=TRUE);
-	cat("Peaks(p>0.05 adjusted Bonferroni):", r$peak_sum$adjust.bonferroni.0.05, "\n", file=out.log, append=TRUE);
+	cat("Peaks(p<=0.05 ):", r$peak_sum$adjust.none.0.05, "\n", file=out.log, append=TRUE);
+	cat("Peaks(p<=0.05 with FDR correction):", r$peak_sum$adjust.fdr.0.05, "\n", file=out.log, append=TRUE);
+	cat("Peaks(p<=0.05 with Bonferroni correction):", r$peak_sum$adjust.bonferroni.0.05, "\n", file=out.log, append=TRUE);
 	cat("Peaks(width<50):", r$peak_sum$peak.narrow100, "\n", file=out.log, append=TRUE);
 	cat("Peaks(width<50 and p<=0.05):", r$peak_sum$peak.narrow100.sig, "\n", file=out.log, append=TRUE);
 
