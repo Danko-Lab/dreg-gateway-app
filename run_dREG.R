@@ -110,7 +110,7 @@ out.full.bed <- paste(outfile, "dREG.peak.full.bed", sep=".")
 out.chrom.info <- paste(outfile, "chrom.info", sep=".")
 
 make.chrom.info(ps_plus_path, ps_minus_path, out.chrom.info);
-make_index_gz( r$raw_peak, out.raw.peak.bed);
+make_index_gz( r$raw_peak[,-2], out.raw.peak.bed);
 make_index_gz( r$infp_bed, out.infp.bed );
 make_bw( r$infp_bed[,1:4], out.infp.bw );
 make_index_gz( r$peak_bed, out.full.bed );
